@@ -1,3 +1,4 @@
+from fileinput import filename
 import os
 import re
 import pandas as pd
@@ -40,14 +41,41 @@ class ExcelLoader:
         )
 
         keywords = {
-            "company",
-            "company name",
-            "ticker",
-            "sector",
+
+            "id",
+
+            "company_id",
+
+            "company_name",
+
             "year",
+
+            "date",
+
             "sales",
+
             "revenue",
-            "profit"
+
+            "profit",
+
+            "assets",
+
+            "liabilities",
+
+            "pros",
+
+            "cons",
+
+            "company_logo",
+
+            "website",
+
+            "broad_sector",
+
+            "open_price",
+
+            "close_price"
+
         }
 
         for i, row in preview.iterrows():
@@ -74,6 +102,35 @@ class ExcelLoader:
 
         if not os.path.exists(filepath):
             raise FileNotFoundError(filepath)
+        
+        filename = filepath.lower()
+
+        fixed_headers = {
+
+            "companies.xlsx": 1,
+            "analysis.xlsx": 1,
+            "balancesheet.xlsx": 1,
+            "cashflow.xlsx": 1,
+            "documents.xlsx": 1,
+            "profitandloss.xlsx": 1,
+            "prosandcons.xlsx": 1
+
+        }
+
+        for file, row in fixed_headers.items():
+
+            if  filename.endswith(file):
+
+                header_row = row
+
+                break
+
+            else:
+
+                header_row = self._find_header_row(
+                    filepath,
+                    sheet_name
+                )
 
         header_row = self._find_header_row(filepath, sheet_name)
 

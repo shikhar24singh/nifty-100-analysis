@@ -1,15 +1,51 @@
-venv/
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
 
+# Virtual Environment
+venv/
+.venv/
+env/
+
+# Environment Variables
 .env
 
-output/
-*.db
-
-.ipynb_checkpoints/
-
+# VS Code
 .vscode/
 
+# Jupyter
+.ipynb_checkpoints/
+
+# Output Files
+output/
+logs/
+
+# SQLite Database
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# Python Cache
+.pytest_cache/
+.coverage
+htmlcov/
+.cache/
+
+# Build Files
+build/
+dist/
+*.egg-info/
+
+# OS Files
 .DS_Store
 Thumbs.db
+
+# Temporary Files
+*.tmp
+*.log
+
+# Personal Test Files
+test.py
+test2.py
