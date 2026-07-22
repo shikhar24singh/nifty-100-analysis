@@ -1,5 +1,4 @@
-from math import isclose
-
+import math
 
 def net_profit_margin(net_profit, sales):
 
