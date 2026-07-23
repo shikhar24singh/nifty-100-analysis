@@ -1,7 +1,10 @@
+import pandas as pd
 def free_cash_flow(
     operating_activity,
     investing_activity
 ):
+    if pd.isna(operating_activity) or pd.isna(investing_activity):
+        return None
 
     return operating_activity + investing_activity
 

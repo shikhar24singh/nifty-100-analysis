@@ -1,8 +1,18 @@
 import math
 
+
+def _valid(*values):
+    for value in values:
+        if value is None:
+            return False
+        if isinstance(value, float) and math.isnan(value):
+            return False
+    return True
+
+
 def net_profit_margin(net_profit, sales):
 
-    if sales == 0:
+    if not _valid(net_profit, sales) or sales == 0:
         return None
 
     return round((net_profit / sales) * 100, 2)
@@ -10,7 +20,7 @@ def net_profit_margin(net_profit, sales):
 
 def operating_profit_margin(operating_profit, sales):
 
-    if sales == 0:
+    if not _valid(operating_profit, sales) or sales == 0:
         return None
 
     return round((operating_profit / sales) * 100, 2)
@@ -18,13 +28,16 @@ def operating_profit_margin(operating_profit, sales):
 
 def check_opm(opm_calculated, opm_source):
 
-    if opm_calculated is None or opm_source is None:
+    if not _valid(opm_calculated, opm_source):
         return False
 
     return abs(opm_calculated - opm_source) > 1
 
 
 def return_on_equity(net_profit, equity_capital, reserves):
+
+    if not _valid(net_profit, equity_capital, reserves):
+        return None
 
     equity = equity_capital + reserves
 
@@ -40,6 +53,9 @@ def return_on_capital_employed(
     reserves,
     borrowings
 ):
+
+    if not _valid(ebit, equity_capital, reserves, borrowings):
+        return None
 
     capital_employed = equity_capital + reserves + borrowings
 
@@ -69,12 +85,16 @@ def roce_status(roce, broad_sector):
 
 def return_on_assets(net_profit, total_assets):
 
-    if total_assets == 0:
+    if not _valid(net_profit, total_assets) or total_assets == 0:
         return None
 
     return round((net_profit / total_assets) * 100, 2)
 
+
 def debt_to_equity(borrowings, equity_capital, reserves):
+
+    if not _valid(borrowings, equity_capital, reserves):
+        return None
 
     if borrowings == 0:
         return 0
@@ -103,6 +123,9 @@ def interest_coverage_ratio(
     other_income,
     interest
 ):
+
+    if not _valid(operating_profit, other_income, interest):
+        return None
 
     if interest == 0:
         return None
@@ -134,6 +157,9 @@ def net_debt(
     investments
 ):
 
+    if not _valid(borrowings, investments):
+        return None
+
     return borrowings - investments
 
 
@@ -142,7 +168,7 @@ def asset_turnover(
     total_assets
 ):
 
-    if total_assets == 0:
+    if not _valid(sales, total_assets) or total_assets == 0:
         return None
 
     return round(

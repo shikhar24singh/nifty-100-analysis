@@ -1,7 +1,19 @@
+import math
+
 def calculate_cagr(start_value, end_value, years):
 
     if years <= 0:
         return None, "INSUFFICIENT"
+
+    if start_value is None or end_value is None:
+        return None, "MISSING"
+
+    if (
+        isinstance(start_value, float) and math.isnan(start_value)
+    ) or (
+        isinstance(end_value, float) and math.isnan(end_value)
+    ):
+        return None, "MISSING"
 
     if start_value == 0:
         return None, "ZERO_BASE"
